@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/semantic.min.css"/>
+    <title>Upload Form</title>
+</head>
+<body>
+    <div class="ui container">
+        <form class="ui form" action="/upload" method="post" enctype="multipart/form-data">
+            <h4 class="ui dividing header">Equipment Details</h4>
+            <div class="field">
+                <label>Equipment ID</label>
+                <input type="text" name="equipmentId" placeholder="Enter Equipment ID">
+            </div>
+            <div class="field">
+                <label>Before Picture</label>
+                <input type="file" name="beforePic" accept="image/*">
+            </div>
+            <div class="field">
+                <label>After Picture</label>
+                <input type="file" name="afterPic" accept="image/*">
+            </div>
+            <button class="ui button" type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>
