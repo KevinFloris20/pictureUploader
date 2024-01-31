@@ -20,6 +20,15 @@ const upload = multer({ storage: storage });
 router.get('/semantic.min.css', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'semantic.min.css'));
 });
+router.get('/semantic.min.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'semantic.min.js'));
+});
+router.get('/style.css', (req,res) =>{
+    res.sendFile(path.join(__dirname,"public", 'style.css'));
+});
+router.get('/script.js', (req,res) =>{
+    res.sendFile(path.join(__dirname,"public", 'script.js'));
+});
 
 
 
@@ -28,9 +37,12 @@ router.get('/semantic.min.css', (req, res) => {
 router.get('/', (req, res) => {
     res.render('index');
 });
-router.post('/upload', upload.fields([{ name: 'beforePic', maxCount: 1 }, { name: 'afterPic', maxCount: 1 }]), (req, res) => {
+router.post('/upload', upload.fields([
+    { name: 'beforePic', maxCount: 50 },
+    { name: 'afterPic', maxCount: 50 }
+]), (req, res) => {
     console.log(req.body);
-    console.log(req.files); 
+    console.log(req.files);
     res.send('Files uploaded successfully!');
 });
 

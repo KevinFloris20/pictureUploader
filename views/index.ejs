@@ -4,27 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/semantic.min.css"/>
-    <title>Upload Form</title>
+    <link rel="stylesheet" href="/style.css">
+    <title>Pictue Upload</title>
 </head>
 <body>
-    <div class="ui container">
+    <div class="form-container">
         <form class="ui form" action="/upload" method="post" enctype="multipart/form-data">
             <h4 class="ui dividing header">Equipment Details</h4>
+            
             <div class="field">
                 <label>Equipment ID</label>
-                <input type="text" name="equipmentId" placeholder="Enter Equipment ID">
+                <input autocomplete="off" type="text" name="equipmentId" placeholder="Enter Equipment ID">
             </div>
-            <div class="field">
-                <label>Before Picture</label>
-                <input type="file" name="beforePic" accept="image/*">
+            
+            <div class="file-drop-area before-area">
+                <label>Before Pictures</label>
+                <button id="submitBBtn" type="button" class="ui button" onclick="document.getElementById('beforePic').click()">Choose Photos</button>
+                <input type="file" id="beforePic" name="beforePic[]" accept="image/*" multiple class="file-input">
+                <div class="thumbnails" id="beforePicThumbnails"></div>
             </div>
-            <div class="field">
-                <label>After Picture</label>
-                <input type="file" name="afterPic" accept="image/*">
+
+            <div class="file-drop-area after-area">
+                <label>After Pictures</label>
+                <button id="submitABtn" type="button" class="ui button" onclick="document.getElementById('afterPic').click()">Choose Photos</button>
+                <input type="file" id="afterPic" name="afterPic[]" accept="image/*" multiple class="file-input">
+                <div class="thumbnails" id="afterPicThumbnails"></div>
             </div>
-            <button class="ui button" type="submit">Submit</button>
+
+            <button id="submitBtn" class="ui button" type="submit">Submit</button>
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/semantic.min.js"></script>
+    <script src="/script.js"></script>
 </body>
 </html>
