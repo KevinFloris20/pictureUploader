@@ -6,7 +6,7 @@ const router = express.Router();
 //for handling storage ops
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, '../uploads/');
     },
     filename: function(req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
@@ -18,16 +18,16 @@ const upload = multer({ storage: storage });
 
 //router for semantic
 router.get('/semantic.min.css', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'semantic.min.css'));
+    res.sendFile(path.join(__dirname, '../public', 'semantic.min.css'));
 });
 router.get('/semantic.min.js', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'semantic.min.js'));
+    res.sendFile(path.join(__dirname, '../public', 'semantic.min.js'));
 });
 router.get('/style.css', (req,res) =>{
-    res.sendFile(path.join(__dirname,"public", 'style.css'));
+    res.sendFile(path.join(__dirname,"../public", 'style.css'));
 });
 router.get('/script.js', (req,res) =>{
-    res.sendFile(path.join(__dirname,"public", 'script.js'));
+    res.sendFile(path.join(__dirname,"../public", 'script.js'));
 });
 
 
