@@ -9,29 +9,39 @@
 </head>
 <body>
     <div class="form-container">
-        <form class="ui form" action="/upload" method="post" enctype="multipart/form-data">
+        <form id="uploadForm" class="ui form" action="/upload" method="post" enctype="multipart/form-data">
             <h4 class="ui dividing header">Equipment Details</h4>
             
-            <div class="field">
+            <!-- the form  -->
+            <div class="field" id="equipmentIdField">
                 <label>Equipment ID</label>
                 <input autocomplete="off" type="text" name="equipmentId" placeholder="Enter Equipment ID">
             </div>
             
             <div class="file-drop-area before-area">
                 <label>Before Pictures</label>
-                <button id="submitBBtn" type="button" class="ui button" onclick="document.getElementById('beforePic').click()">Choose Photos</button>
+                <button type="button" class="ui button" onclick="document.getElementById('beforePic').click()">Choose Photos</button>
                 <input type="file" id="beforePic" name="beforePic[]" accept="image/*" multiple class="file-input">
                 <div class="thumbnails" id="beforePicThumbnails"></div>
             </div>
 
             <div class="file-drop-area after-area">
                 <label>After Pictures</label>
-                <button id="submitABtn" type="button" class="ui button" onclick="document.getElementById('afterPic').click()">Choose Photos</button>
+                <button type="button" class="ui button" onclick="document.getElementById('afterPic').click()">Choose Photos</button>
                 <input type="file" id="afterPic" name="afterPic[]" accept="image/*" multiple class="file-input">
                 <div class="thumbnails" id="afterPicThumbnails"></div>
             </div>
 
-            <button id="submitBtn" class="ui button" type="submit">Submit</button>
+            <!-- Error  -->
+            <div id="errorMessage" class="ui error message" style="display:none;"></div>
+            
+            <!-- Loading -->
+            <div id="loadingIndicator" class="ui active inverted dimmer" style="display:none;">
+                <div class="ui text loader">Loading...</div>
+            </div>
+
+            <!-- submit  -->
+            <button id="submitBtn" class="ui button" type="button">Submit</button>
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

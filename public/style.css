@@ -2,7 +2,7 @@ body {
     background-color: #f4f4f4; 
 }
 .form-container {
-    margin: 0 auto;
+    margin: 20px auto 0px auto;
     padding: 20px;
 }
 .file-drop-area {
@@ -73,7 +73,12 @@ body {
 .delete-btn:hover {
     background-color: rgba(255, 0, 0, 0.9); 
 }
-
+.required-field {
+    border: 2px solid red;
+}
+.hidden { 
+    display: none; 
+}
 
 
 @media (max-width: 600px) {
