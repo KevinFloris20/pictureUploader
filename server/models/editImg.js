@@ -1,9 +1,8 @@
 const Jimp = require('jimp');
 
 /**
- * Converts an image from a Buffer to PNG format.
- * @param {Buffer} buffer - The buffer containing the image data.
- * @returns {Promise<Buffer>} - A promise that resolves with the PNG image buffer.
+ * @param {Buffer} buffer - Buffer
+ * @returns {Promise<Buffer>} - promise that resolves to a PNG buffer
  */
 async function convertToPng(buffer) {
     try {
@@ -16,4 +15,14 @@ async function convertToPng(buffer) {
     }
 }
 
-module.exports = { convertToPng };
+async function getMimeType(buffer) {
+    try {
+        const image = await Jimp.read(buffer);
+        return image.getMIME();
+    } catch (error) {
+        console.error('Error getting MIME type:', error);
+        throw error;
+    }
+}
+
+module.exports = { convertToPng, getMimeType };

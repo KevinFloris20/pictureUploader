@@ -1,6 +1,5 @@
 const { google } = require('googleapis');
 const { Readable } = require('stream'); 
-const Jimp = require('jimp');
 require('dotenv').config({ path: 'cred.env' });
 
 const KEYFILEPATH = process.env.KEYFILEPATH; 
@@ -57,14 +56,4 @@ async function createFolder(name, parentFolderId = null) {
   }
 }
 
-async function convertToPng(buffer) {
-  try {
-    const image = await Jimp.read(buffer);
-    return await image.getBufferAsync(Jimp.MIME_PNG);
-  } catch (error) {
-    console.error('Error converting image to PNG:', error);
-    throw error;
-  }
-}
-
-module.exports = { uploadFile, createFolder, convertToPng };
+module.exports = { uploadFile, createFolder };

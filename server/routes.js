@@ -40,9 +40,7 @@ router.post('/upload', upload.fields([
         }
         const equipmentId = req.body.equipmentId;
         const images = [...(req.files.beforePic || []), ...(req.files.afterPic || [])];
-        
         await processAndUploadImages(equipmentId, images);
-
         res.json({ message: "Images processed and uploaded successfully!" });
     } catch (error) {
         console.error(error);
