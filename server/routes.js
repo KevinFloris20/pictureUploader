@@ -3,7 +3,6 @@ const multer = require('multer');
 const path = require('path');
 const router = express.Router();
 const { processAndUploadImages } = require('./models/sendToDB.js');
-//for handling storage ops
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
