@@ -89,6 +89,9 @@ body {
     .ui.form {
         width: 100%;
     }
+    #equipID{
+        font-size: 16px;
+    }
 }
 @media (min-width: 601px) {
     .form-container {

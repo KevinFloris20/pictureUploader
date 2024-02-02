@@ -2,7 +2,15 @@ const sharp = require('sharp');//npm i sharp@0.30.7
 
 async function convertToPng(buffer) {
     try {
-        const pngBuffer = await sharp(buffer).png().toBuffer();
+        const pngBuffer = await sharp(buffer)
+            .rotate()
+            .withMetadata()
+            .png({
+                quality: 40, //between 0-100
+                compressionLevel: 9, //compression level from 0 (fastest) to 9 (smallest)
+                progressive: true //progressive scanning
+            })
+            .toBuffer();
         console.log(pngBuffer);
         return pngBuffer;
     } catch (error) {
