@@ -1,6 +1,6 @@
 const path = require('path');
 const { uploadFile, createFolder } = require('./googleDriveService');
-const { convertToPng, getMimeType } = require('./editImg');
+const { convertToPng } = require('./editImg');
 
 const MAIN_FOLDER_ID = '1wlKANogfrk5cTnpCEAlX-mpMU26VQ5m0'; 
 
@@ -10,6 +10,7 @@ async function transformImgs(images, beforeFolderId, afterFolderId){
             const pngBuffer = await convertToPng(image.buffer);
             const newFileName = `${path.parse(image.originalname).name}.png`;
             const folderId = image.fieldname === 'beforePic' ? beforeFolderId : afterFolderId;
+            
             await uploadFile(pngBuffer, 'image/png', folderId, newFileName);
         }
         console.log('All images transformed and uploaded');
