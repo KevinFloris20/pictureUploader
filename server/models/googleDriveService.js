@@ -56,4 +56,19 @@ async function createFolder(name, parentFolderId = null) {
   }
 }
 
-module.exports = { uploadFile, createFolder };
+async function downloadFile(fileId) {
+    const response = await drive.files.get({
+        fileId: fileId,
+        alt: 'media'
+    }, { responseType: 'stream' });
+
+    return new Promise((resolve, reject) => {
+        const chunks = [];
+        response.data
+            .on('data', (chunk) => chunks.push(chunk))
+            .on('end', () => resolve(Buffer.concat(chunks)))
+            .on('error', reject);
+    });
+}
+
+module.exports = { uploadFile, createFolder, downloadFile };

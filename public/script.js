@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
         beforePic: [],
         afterPic: []
     };
+    let totalFileSize = 0;
 
     function addFiles(inputId, fileList) {
         for (var file of fileList) {
@@ -70,6 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         }
 
+        //check if total file size is less than 200MB
+        totalFileSize = fileTracker.beforePic.concat(fileTracker.afterPic).reduce((total, file) => total + file.size, 0);
+        if (totalFileSize > 200 * 1024 * 1024) {
+            showError('Too many pictures, Total size must be under 200MB');
+            return false;
+        }
+
         hideError();
         return true;
     }
@@ -78,34 +86,43 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         if (!validateForm()) return;
         setLoading(true);
-
-        var formData = new FormData();
-        formData.append('equipmentId', document.querySelector('[name="equipmentId"]').value.trim());
-        fileTracker.beforePic.forEach(file => formData.append('beforePic', file));
-        fileTracker.afterPic.forEach(file => formData.append('afterPic', file));
-
-        fetch('/upload', {
-            method: 'POST',
-            body: formData
-        }).then(response => {
-            const contentType = response.headers.get("content-type");
-            if (contentType && contentType.includes("application/json")) {
-                return response.json();
+    
+        const equipmentId = document.querySelector('[name="equipmentId"]').value.trim();
+        const totalImages = fileTracker.beforePic.length + fileTracker.afterPic.length;
+    
+        const uploadImage = (file, type, index) => {
+            const formData = new FormData();
+            formData.append('equipmentId', equipmentId);
+            formData.append('totalImages', totalImages);
+            formData.append('imageIndex', index);
+            formData.append(type, file);
+            return fetch('/upload', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json());
+        };
+    
+        const promises = [];
+        fileTracker.beforePic.forEach((file, index) => promises.push(uploadImage(file, 'beforePic', index)));
+        fileTracker.afterPic.forEach((file, index) => promises.push(uploadImage(file, 'afterPic', index + fileTracker.beforePic.length)));
+    
+        Promise.allSettled(promises).then(results => {
+            const failedUpload = results.some(result => result.status === 'rejected' || result.value.error);
+            if (failedUpload) {
+                showError('Some pictures failed to load. Please try again.');
+                setLoading(false);
             } else {
-                return response.text();
+                console.log('All images uploaded successfully!');
+                setLoading(false);
+                window.location.reload();
             }
-        }).then(data => {
-            console.log(data);
-            console.log('Images uploaded successfully!');
-            setLoading(false);
-            window.location.reload(); 
         }).catch(error => {
             console.error(error);
             setLoading(false);
             showError('An error occurred while uploading. Please try again.');
-        });        
+        });
     }
-
+    
     document.getElementById('submitBtn').addEventListener('click', submitForm);
     document.getElementById('beforePic').addEventListener('change', (e) => addFiles('beforePic', e.target.files));
     document.getElementById('afterPic').addEventListener('change', (e) => addFiles('afterPic', e.target.files));
