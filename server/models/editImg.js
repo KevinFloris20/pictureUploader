@@ -1,21 +1,26 @@
 const sharp = require('sharp');//npm i sharp@0.30.7
 
-async function convertToPng(buffer) {
-    try {
-        const pngBuffer = await sharp(buffer)
+async function convertToJpgAndOptimizeSize(buffer) {
+    let qual = 90; 
+    let jpgBuffer;
+    do {
+        jpgBuffer = await sharp(buffer)
             .rotate()
             .withMetadata()
-            .png({
-                quality: 80, //between 0-100
-                compressionLevel: 9, //compression level from 0 (fastest) to 9 (smallest)
-                progressive: true //progressive scanning
+            .jpeg({
+                quality: qual, 
+                progressive: true
             })
             .toBuffer();
-        return pngBuffer;
-    } catch (error) {
-        console.error('Error converting image to PNG:', error);
-        throw error;
-    }
+
+        if (jpgBuffer.length > 5 * 1024 * 1024) { 
+            qual -= 20;
+        } else {
+            break; 
+        }
+    } while (qual > 10);
+
+    return jpgBuffer;
 }
 
 async function getMimeType(buffer) {
@@ -50,7 +55,7 @@ async function getMimeType(buffer) {
     }
 }
 
-module.exports = { convertToPng, getMimeType };
+module.exports = { convertToJpgAndOptimizeSize, getMimeType };
 
 
 

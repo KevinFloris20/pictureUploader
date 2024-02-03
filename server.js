@@ -17,51 +17,40 @@ app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
 
-// var count = 0;
-// function trackMemoryUsage() {
-//     var x = 2000; // ms
-//     var lastRSS = 0;
-//     var secondToLastRss = 0;
-//     setInterval(() => {
-//         const memoryUsage = process.memoryUsage();
-//         if(Math.round(memoryUsage.rss / 1024 / 1024) === Math.round(lastRSS / 1024 / 1024) && Math.round(memoryUsage.rss / 1024 / 1024) === Math.round(secondToLastRss / 1024 / 1024)){
-//             x = 2000;
-//         }else{
-//             x = 100;
-//             secondToLastRss = lastRSS;
-//             lastRSS = memoryUsage.rss;
-//         }
-//         console.log(`Memory Usage - RSS: ${Math.round(memoryUsage.rss / 1024 / 1024)} MB, Heap Used: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB,, count: ${count++}, speed: ${x}ms`);
-//     }, x);
+
+// function dynamicMemoryTracker() {
+//     const memoryUsage = process.memoryUsage();
+//     const rss = parseFloat((memoryUsage.rss / 1024 / 1024).toFixed(2));
+//     const heapUsed = parseFloat((memoryUsage.heapUsed / 1024 / 1024).toFixed(2));
+
+//     console.log(`Memory Usage - RSS: ${rss} MB, Heap Used: ${heapUsed} MB, Count: ${count++}`);
+
+//     let interval = 2000;
+
+//     if (rss === lastRSS && rss === secondToLastRSS) {
+//         interval = 2000; 
+//     } else {
+//         interval = 100;
+//     }
+
+//     secondToLastRSS = lastRSS;
+//     lastRSS = rss;
+
+//     setTimeout(dynamicMemoryTracker, interval);
 // }
-// trackMemoryUsage();
 
-let lastRSS = 0;
-let secondToLastRSS = 0;
-let count = 0;
+// dynamicMemoryTracker();
 
-function dynamicMemoryTracker() {
-    const memoryUsage = process.memoryUsage();
-    const rss = parseFloat((memoryUsage.rss / 1024 / 1024).toFixed(2));
-    const heapUsed = parseFloat((memoryUsage.heapUsed / 1024 / 1024).toFixed(2));
-
-    console.log(`Memory Usage - RSS: ${rss} MB, Heap Used: ${heapUsed} MB, Count: ${count++}`);
-
-    let interval = 2000;
-
-    if (rss === lastRSS && rss === secondToLastRSS) {
-        interval = 2000; 
-    } else {
-        interval = 100;
-    }
-
-    secondToLastRSS = lastRSS;
-    lastRSS = rss;
-
-    setTimeout(dynamicMemoryTracker, interval);
+var count = 0;
+function trackMemoryUsage() {
+    setInterval(() => {
+        const memoryUsage = process.memoryUsage();
+        const rss = parseFloat((memoryUsage.rss / 1024 / 1024).toFixed(2));
+        console.log(`RSS: ${rss}, Memory Usage: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB, count: ${count++}`);
+    }, 2000);
 }
+trackMemoryUsage();
 
-dynamicMemoryTracker();
 
 
 module.exports = app;
