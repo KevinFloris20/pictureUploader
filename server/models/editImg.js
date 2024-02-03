@@ -6,12 +6,11 @@ async function convertToPng(buffer) {
             .rotate()
             .withMetadata()
             .png({
-                quality: 40, //between 0-100
+                quality: 80, //between 0-100
                 compressionLevel: 9, //compression level from 0 (fastest) to 9 (smallest)
                 progressive: true //progressive scanning
             })
             .toBuffer();
-        console.log(pngBuffer);
         return pngBuffer;
     } catch (error) {
         console.error('Error converting image to PNG:', error);
