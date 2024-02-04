@@ -45,32 +45,55 @@ async function processAndUploadImages(equipmentFolderId, images) {
     const updatedAfterFolderId = await withExponentialBackoff(() => createFolder('Updated', afterFolderId));
     
     let imageIds = [];
-    
+    let nextArr = [];
     for (const { buffer, originalname, mimetype, fieldname } of images) {
         logMemoryUsage(`Processing image: ${originalname}`);
         const parentFolderId = fieldname === 'beforePic' ? beforeFolderId : afterFolderId;
         const stream = bufferToStream(buffer);
         const fileId = await withExponentialBackoff(() => uploadFile(stream, mimetype, parentFolderId, originalname));
         imageIds.push(fileId);
-        
-        transformAndUploadImage(fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname);
+        nextArr.push({ fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname });
     }
+    transformAndUploadImage(nextArr);
     logMemoryUsage('End of processAndUploadImages');
 
     return imageIds; 
 }
 
-async function transformAndUploadImage(fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname) {
-    try {
-        const stream = await downloadFile(fileId);
-        const transformedStream = await convertToJpgAndOptimizeSize(stream);
-        const newFileName = `Updated-${path.parse(originalname).name}.jpg`;
-        const updatedFolderId = fieldname === 'beforePic' ? updatedBeforeFolderId : updatedAfterFolderId;
-        
-        await uploadFile(transformedStream, 'image/jpeg', updatedFolderId, newFileName);
-        logMemoryUsage(`Image transformed and uploaded: ${newFileName}`);
-    } catch (error) {
-        console.error(`Error in image transformation for ${fileId}:`, error);
+async function transformAndUploadImage(arr) {
+    let retryItems = [];
+
+    async function processItem(item) {
+        let stream = null;
+        try {
+            const { fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname } = item;
+            stream = await downloadFile(fileId);
+            const transformedStream = convertToJpgAndOptimizeSize(stream);
+            const newFileName = `Updated-${path.parse(originalname).name}.jpg`;
+            const updatedFolderId = fieldname === 'beforePic' ? updatedBeforeFolderId : updatedAfterFolderId;
+            
+            await uploadFile(transformedStream, 'image/jpeg', updatedFolderId, newFileName);
+            logMemoryUsage(`Image transformed and uploaded: ${newFileName}`);
+        } catch (error) {
+            console.error(`Error in image transformation for ${item.fileId}:`, error);
+            retryItems.push(item);
+        } finally {
+            if (stream && typeof stream.destroy === 'function') {
+                stream.destroy();
+            }
+            stream = null; 
+        }
+    }
+
+    for (const item of arr) {
+        await processItem(item);
+    }
+
+    if (retryItems.length > 0) {
+        console.log(`Retrying failed items...`);
+        for (const item of retryItems) {
+            await processItem(item);
+        }
     }
 }
 
