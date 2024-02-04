@@ -97,10 +97,10 @@ router.post('/finalize-session', async (req, res) => {
         if (session.images.length < (session.expectedBeforePicCount + session.expectedAfterPicCount)) {
             return res.status(400).json({ error: 'Not all images received yet.' });
         }
-        // const imageIds = await processAndUploadImages(sessionId, session.images);
+        const imageIds = await processAndUploadImages(sessionId, session.images);
         delete uploadSessions[sessionId]; 
         logMemoryUsage("After processAndUploadImages")
-        res.json({ message: "All images processed successfully." });
+        res.json({ message: "All images processed successfully.", imageIds });
     } catch (error) {
         console.error('Error processing images:', error);
         res.status(500).json({ error: "Failed to process images, please retry." });
