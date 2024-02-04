@@ -1,26 +1,10 @@
-const sharp = require('sharp');//npm i sharp@0.30.7
+const sharp = require('sharp');//npm i sharp@0.30.7   0.31.2??
 
-async function convertToJpgAndOptimizeSize(buffer) {
-    let qual = 90; 
-    let jpgBuffer;
-    do {
-        jpgBuffer = await sharp(buffer)
-            .rotate()
-            .withMetadata()
-            .jpeg({
-                quality: qual, 
-                progressive: true
-            })
-            .toBuffer();
-
-        if (jpgBuffer.length > 5 * 1024 * 1024) { 
-            qual -= 20;
-        } else {
-            break; 
-        }
-    } while (qual > 10);
-
-    return jpgBuffer;
+function convertToJpgAndOptimizeSize(inputStream) {
+    return inputStream.pipe(sharp().rotate().withMetadata().jpeg({
+        quality: 80,
+        progressive: true,
+    }));
 }
 
 async function getMimeType(buffer) {

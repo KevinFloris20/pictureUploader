@@ -90,36 +90,60 @@ document.addEventListener('DOMContentLoaded', () => {
         const equipmentId = document.querySelector('[name="equipmentId"]').value.trim();
         const totalImages = fileTracker.beforePic.length + fileTracker.afterPic.length;
     
-        const uploadImage = (file, type, index) => {
-            const formData = new FormData();
-            formData.append('equipmentId', equipmentId);
-            formData.append('totalImages', totalImages);
-            formData.append('imageIndex', index);
-            formData.append(type, file);
-            return fetch('/upload', {
+        // Start the session
+        fetch('/start-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ equipmentId, totalImages })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const sessionId = data.sessionId;
+            console.log('Session ID:', sessionId);
+        
+            let uploadPromises = [];
+        
+            fileTracker.beforePic.forEach((file, index) => {
+                const formData = new FormData();
+                formData.append('sessionId', sessionId);
+                formData.append('beforePic', file, file.name); 
+                uploadPromises.push(fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json()));
+            });
+        
+            fileTracker.afterPic.forEach((file, index) => {
+                const formData = new FormData();
+                formData.append('sessionId', sessionId);
+                formData.append('afterPic', file, file.name);
+                uploadPromises.push(fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json()));
+            });
+        
+            return Promise.all(uploadPromises).then(() => sessionId);
+        })
+        .then(sessionId => {
+            return fetch('/finalize-session', {
                 method: 'POST',
-                body: formData
-            }).then(response => response.json());
-        };
-    
-        const promises = [];
-        fileTracker.beforePic.forEach((file, index) => promises.push(uploadImage(file, 'beforePic', index)));
-        fileTracker.afterPic.forEach((file, index) => promises.push(uploadImage(file, 'afterPic', index + fileTracker.beforePic.length)));
-    
-        Promise.allSettled(promises).then(results => {
-            const failedUpload = results.some(result => result.status === 'rejected' || result.value.error);
-            if (failedUpload) {
-                showError('Some pictures failed to load. Please try again.');
-                setLoading(false);
-            } else {
-                console.log('All images uploaded successfully!');
-                setLoading(false);
-                window.location.reload();
-            }
-        }).catch(error => {
-            console.error(error);
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sessionId })
+            });
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            setLoading(false); 
+            window.location.reload();
+        })
+        .catch(error => {
+            // convert json res
+            let e = error.json();
+            console.error('Error:', e);
             setLoading(false);
-            showError('An error occurred while uploading. Please try again.');
+            showError(`An error occurred, please try again. ${e.error}`);
         });
     }
     

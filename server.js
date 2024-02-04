@@ -41,15 +41,15 @@ app.listen(PORT, () => {
 
 // dynamicMemoryTracker();
 
-var count = 0;
-function trackMemoryUsage() {
-    setInterval(() => {
-        const memoryUsage = process.memoryUsage();
-        const rss = parseFloat((memoryUsage.rss / 1024 / 1024).toFixed(2));
-        console.log(`RSS: ${rss}, Memory Usage: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB, count: ${count++}`);
-    }, 2000);
-}
-trackMemoryUsage();
+// var count = 0;
+// function trackMemoryUsage() {
+//     setInterval(() => {
+//         const memoryUsage = process.memoryUsage();
+//         const rss = parseFloat((memoryUsage.rss / 1024 / 1024).toFixed(2));
+//         console.log(`RSS: ${rss}, Memory Usage: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB, count: ${count++}`);
+//     }, 2000);
+// }
+// trackMemoryUsage();
 
 
 
