@@ -6,7 +6,7 @@ const { Readable } = require('stream');
 
 const logMemoryUsage = (message) => {
     const memoryUsage = process.memoryUsage();
-    console.log(`${message} -- Memory Usage: Heap Total: ${Math.round(memoryUsage.heapTotal / 1024 / 1024)} MB, Heap Used: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB, RSS: ${Math.round(memoryUsage.rss / 1024 / 1024)} MB`);
+    console.log(`${message} -- Memory Usage: RSS: ${Math.round(memoryUsage.rss / 1024 / 1024)} MB, Heap Total: ${Math.round(memoryUsage.heapTotal / 1024 / 1024)} MB, Heap Used: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB`);
 };
 
 async function withExponentialBackoff(operation, maxRetries = 5) {
@@ -67,13 +67,16 @@ async function transformAndUploadImage(arr) {
         let stream = null;
         try {
             const { fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname } = item;
+            logMemoryUsage('Start downloading file')
             stream = await downloadFile(fileId);
+            logMemoryUsage('End/Send to sharp ')
             const transformedStream = convertToJpgAndOptimizeSize(stream);
+            logMemoryUsage('End of sharp')
             const newFileName = `Updated-${path.parse(originalname).name}.jpg`;
             const updatedFolderId = fieldname === 'beforePic' ? updatedBeforeFolderId : updatedAfterFolderId;
-            
+            logMemoryUsage('Start new upload')
             await uploadFile(transformedStream, 'image/jpeg', updatedFolderId, newFileName);
-            logMemoryUsage(`Image transformed and uploaded: ${newFileName}`);
+            logMemoryUsage('End new upload')
         } catch (error) {
             console.error(`Error in image transformation for ${item.fileId}:`, error);
             retryItems.push(item);
@@ -86,6 +89,7 @@ async function transformAndUploadImage(arr) {
     }
 
     for (const item of arr) {
+        console.log(`Processing item: ${item.fileId}`)
         await processItem(item);
     }
 
