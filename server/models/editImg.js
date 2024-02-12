@@ -1,8 +1,8 @@
 const sharp = require('sharp');//npm i sharp@0.30.7   0.31.2??
-
+sharp.cache(false);
+sharp.concurrency(1);
 
 function convertToJpgAndOptimizeSize(inputStream) {
-    
     return inputStream.pipe(sharp().rotate().withMetadata().jpeg({
         quality: 80,
         progressive: true,

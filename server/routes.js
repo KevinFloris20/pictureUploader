@@ -86,26 +86,22 @@ router.post('/upload', upload.fields([
 });
 
 router.post('/finalize-session', async (req, res) => {
-    logMemoryUsage("Start of /finalize-session")
     const { sessionId } = req.body;
     if (!sessionId || !uploadSessions[sessionId]) {
         return res.status(400).json({ error: 'Invalid session ID' });
     }
     try {
-        logMemoryUsage("Before processAndUploadImages")
         const session = uploadSessions[sessionId];
         if (session.images.length < (session.expectedBeforePicCount + session.expectedAfterPicCount)) {
             return res.status(400).json({ error: 'Not all images received yet.' });
         }
         processAndUploadImages(sessionId, session.images);
         delete uploadSessions[sessionId]; 
-        logMemoryUsage("After processAndUploadImages")
         res.json({ message: "All images processed successfully." });
     } catch (error) {
         console.error('Error processing images:', error);
         res.status(500).json({ error: "Failed to process images, please retry." });
     }
-    logMemoryUsage("End of /finalize-session")
 });
 
 router.use((err, req, res, next) => {

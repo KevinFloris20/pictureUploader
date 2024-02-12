@@ -9,7 +9,7 @@ const auth = new google.auth.GoogleAuth({
 const drive = google.drive({ version: 'v3', auth });
 
 async function uploadFile(stream, mimeType, folderId, fileName) {
-    const response = await drive.files.create({
+    let response = await drive.files.create({
         requestBody: {
             name: fileName,
             parents: [folderId],
@@ -19,9 +19,14 @@ async function uploadFile(stream, mimeType, folderId, fileName) {
             mimeType,
             body: stream,
         },
+        fields: 'id',
     });
-    return response.data.id;
+    const id = response.data.id;
+    response = null;
+    stream.destroy();
+    return id
 }
+
 
 async function createFolder(name, parentFolderId = null) {
     const fileMetadata = {

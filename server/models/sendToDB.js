@@ -70,13 +70,16 @@ async function transformAndUploadImage(arr) {
             logMemoryUsage('Start downloading file')
             stream = await downloadFile(fileId);
             logMemoryUsage('End/Send to sharp ')
-            const transformedStream = convertToJpgAndOptimizeSize(stream);
+            let transformedStream = convertToJpgAndOptimizeSize(stream);
             logMemoryUsage('End of sharp')
+
             const newFileName = `Updated-${path.parse(originalname).name}.jpg`;
             const updatedFolderId = fieldname === 'beforePic' ? updatedBeforeFolderId : updatedAfterFolderId;
             logMemoryUsage('Start new upload')
-            await uploadFile(transformedStream, 'image/jpeg', updatedFolderId, newFileName);
+            const newId = await withExponentialBackoff(() => uploadFile(transformedStream, 'image/jpeg', updatedFolderId, newFileName));
             logMemoryUsage('End new upload')
+            transformedStream.destroy();
+            console.log(`Image transformation and upload successful for ${fileId} -> ${newId}`);
         } catch (error) {
             console.error(`Error in image transformation for ${item.fileId}:`, error);
             retryItems.push(item);
@@ -91,6 +94,7 @@ async function transformAndUploadImage(arr) {
     for (const item of arr) {
         console.log(`Processing item: ${item.fileId}`)
         await processItem(item);
+        logMemoryUsage('End of processItem')
     }
 
     if (retryItems.length > 0) {
