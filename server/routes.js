@@ -6,6 +6,25 @@ const { processAndUploadImages, makeFirstFolder } = require('./models/sendToDB.j
 const bodyParser = require('body-parser');
 const maxFileSize = 200 * 1024 * 1024;
 
+/* These are the routes for the whole app:
+
+How this app works is that it automates the uploading
+proccess of photos from a client to google drive. 
+
+Photos will be uploaded to drive in a folder named by
+the client, and then in that folder there will be two
+before and after folder with both sets of pictures in
+each and then a updated folder in each of those two
+folders for the converted pictures, which will be reduced
+in size, converted to jpg, and then also uploaded to drive.
+This site should be able to handle 50 before and 50 after
+pictures while sequentially uploading them to drive and or
+transforming them.
+
+This router will handle the front end statics, and the
+session to handle the stream of photo information from
+the client. 
+*/
 
 //setup for file size and storage
 const storage = multer.memoryStorage();
@@ -46,7 +65,6 @@ router.get('/', (req, res) => {
 
 let uploadSessions = {};
 router.post('/start-session', async (req, res) => {
-    logMemoryUsage("Start of /start-session")
     const { equipmentId } = req.body;
     if (!equipmentId) {
         return res.status(400).json({ error: 'Equipment ID is required' });
@@ -66,7 +84,6 @@ router.post('/upload', upload.fields([
     { name: 'beforePic', maxCount: 100 },
     { name: 'afterPic', maxCount: 100 }
 ]), async (req, res) => {
-    logMemoryUsage("Start of /upload")
     const { sessionId } = req.body;
     if (!sessionId || !uploadSessions[sessionId]) {
         return res.status(400).json({ error: 'Invalid session ID' });
@@ -82,7 +99,6 @@ router.post('/upload', upload.fields([
         });
     }
     res.json({ message: "Images received successfully." });
-    logMemoryUsage("End of /upload")
 });
 
 router.post('/finalize-session', async (req, res) => {

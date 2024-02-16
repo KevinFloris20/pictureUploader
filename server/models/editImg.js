@@ -1,4 +1,4 @@
-const sharp = require('sharp');//npm i sharp@0.30.7   0.31.2??
+const sharp = require('sharp');//npm i sharp@0.31.2?
 sharp.cache(false);
 sharp.concurrency(1);
 

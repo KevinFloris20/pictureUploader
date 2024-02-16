@@ -6,7 +6,7 @@ const { Readable } = require('stream');
 
 const logMemoryUsage = (message) => {
     const memoryUsage = process.memoryUsage();
-    console.log(`${message} -- Memory Usage: RSS: ${Math.round(memoryUsage.rss / 1024 / 1024)} MB, Heap Total: ${Math.round(memoryUsage.heapTotal / 1024 / 1024)} MB, Heap Used: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB`);
+    console.log(`Memory Usage: RSS: ${Math.round(memoryUsage.rss / 1024 / 1024)} MB, Heap Total: ${Math.round(memoryUsage.heapTotal / 1024 / 1024)} MB, Heap Used: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB -- ${message}`);
 };
 
 async function withExponentialBackoff(operation, maxRetries = 5) {
@@ -36,9 +36,13 @@ function bufferToStream(buffer) {
     return stream;
 }
 
+/*this function will take all of the images sent from the client
+and the parent folder id and upload them as is directly to google drive, 
+this function also makes the file structure for each submit. 
+Once this is done an array of image id's are passed to the next function*/
 async function processAndUploadImages(equipmentFolderId, images) {
     logMemoryUsage('Start of processAndUploadImages');
-    
+
     const beforeFolderId = await withExponentialBackoff(() => createFolder('Before', equipmentFolderId));
     const afterFolderId = await withExponentialBackoff(() => createFolder('After', equipmentFolderId));
     const updatedBeforeFolderId = await withExponentialBackoff(() => createFolder('Updated', beforeFolderId));
@@ -54,12 +58,15 @@ async function processAndUploadImages(equipmentFolderId, images) {
         imageIds.push(fileId);
         nextArr.push({ fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname });
     }
+    logMemoryUsage('End of processAndUploadImages sending array to transformAndUploadImage');
     transformAndUploadImage(nextArr);
-    logMemoryUsage('End of processAndUploadImages');
-
     return imageIds; 
 }
 
+/*This function then downloads each picture from drive
+send them to sharp.js for transformation, and then
+takes the stream from sharp and reuploads them
+into the updated folder and a new folder*/
 async function transformAndUploadImage(arr) {
     let retryItems = [];
 
@@ -69,15 +76,15 @@ async function transformAndUploadImage(arr) {
             const { fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname } = item;
             logMemoryUsage('Start downloading file')
             stream = await downloadFile(fileId);
-            logMemoryUsage('End/Send to sharp ')
+            logMemoryUsage('Finish Downloading, now sending to sharp.js')
             let transformedStream = convertToJpgAndOptimizeSize(stream);
-            logMemoryUsage('End of sharp')
+            logMemoryUsage('End of sharp.js transformation')
 
             const newFileName = `Updated-${path.parse(originalname).name}.jpg`;
             const updatedFolderId = fieldname === 'beforePic' ? updatedBeforeFolderId : updatedAfterFolderId;
-            logMemoryUsage('Start new upload')
+            logMemoryUsage('Start upload to drive')
             const newId = await withExponentialBackoff(() => uploadFile(transformedStream, 'image/jpeg', updatedFolderId, newFileName));
-            logMemoryUsage('End new upload')
+            logMemoryUsage('End upload to drive')
             transformedStream.destroy();
             console.log(`Image transformation and upload successful for ${fileId} -> ${newId}`);
         } catch (error) {
