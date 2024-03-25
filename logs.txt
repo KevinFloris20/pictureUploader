@@ -1,0 +1,225 @@
+DEFAULT 2024-02-16T17:17:47.558408Z Memory Usage: RSS: 188 MB, Heap Total: 56 MB, Heap Used: 52 MB -- Processing image: IMG_3382.jpeg
+DEFAULT 2024-02-16T17:17:49.022474Z Memory Usage: RSS: 189 MB, Heap Total: 57 MB, Heap Used: 52 MB -- Processing image: IMG_3381.jpeg
+DEFAULT 2024-02-16T17:17:50.333147Z Memory Usage: RSS: 189 MB, Heap Total: 57 MB, Heap Used: 52 MB -- Processing image: IMG_3374.jpeg
+DEFAULT 2024-02-16T17:17:51.773143Z Memory Usage: RSS: 189 MB, Heap Total: 57 MB, Heap Used: 52 MB -- Processing image: IMG_3375.jpeg
+DEFAULT 2024-02-16T17:17:53.301041Z Memory Usage: RSS: 189 MB, Heap Total: 57 MB, Heap Used: 52 MB -- Processing image: IMG_3376.jpeg
+DEFAULT 2024-02-16T17:17:54.943280Z Memory Usage: RSS: 186 MB, Heap Total: 54 MB, Heap Used: 49 MB -- Processing image: IMG_3373.jpeg
+DEFAULT 2024-02-16T17:17:56.389089Z Memory Usage: RSS: 186 MB, Heap Total: 54 MB, Heap Used: 49 MB -- Processing image: IMG_3377.jpeg
+DEFAULT 2024-02-16T17:17:57.901965Z Memory Usage: RSS: 186 MB, Heap Total: 54 MB, Heap Used: 50 MB -- Processing image: IMG_3378.jpeg
+DEFAULT 2024-02-16T17:17:59.449914Z Memory Usage: RSS: 186 MB, Heap Total: 54 MB, Heap Used: 50 MB -- Processing image: IMG_3370.jpeg
+DEFAULT 2024-02-16T17:18:00.973926Z Memory Usage: RSS: 186 MB, Heap Total: 54 MB, Heap Used: 50 MB -- Processing image: IMG_3369.jpeg
+DEFAULT 2024-02-16T17:18:02.478381Z Memory Usage: RSS: 186 MB, Heap Total: 54 MB, Heap Used: 50 MB -- Processing image: IMG_3371.jpeg
+DEFAULT 2024-02-16T17:18:03.990596Z Memory Usage: RSS: 189 MB, Heap Total: 54 MB, Heap Used: 49 MB -- Processing image: IMG_3372.jpeg
+DEFAULT 2024-02-16T17:18:05.556607Z Memory Usage: RSS: 189 MB, Heap Total: 54 MB, Heap Used: 49 MB -- End of processAndUploadImages sending array to transformAndUploadImage
+DEFAULT 2024-02-16T17:18:05.556621Z Processing item: 1N7fxmIv2FiL8-ff1SSFDK8qBWnwKuG-s
+DEFAULT 2024-02-16T17:18:05.556788Z Memory Usage: RSS: 189 MB, Heap Total: 54 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:18:06.636802Z Memory Usage: RSS: 189 MB, Heap Total: 54 MB, Heap Used: 50 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:18:06.639129Z Memory Usage: RSS: 189 MB, Heap Total: 54 MB, Heap Used: 50 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:18:06.639452Z Memory Usage: RSS: 189 MB, Heap Total: 54 MB, Heap Used: 50 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:18:08.760349Z Memory Usage: RSS: 207 MB, Heap Total: 55 MB, Heap Used: 50 MB -- End upload to drive
+DEFAULT 2024-02-16T17:18:08.760363Z Image transformation and upload successful for 1N7fxmIv2FiL8-ff1SSFDK8qBWnwKuG-s -> 1CCOgMQ3Wl8CkjFylUF_HLj-ZEh-BtXXX
+DEFAULT 2024-02-16T17:18:08.760437Z Memory Usage: RSS: 207 MB, Heap Total: 55 MB, Heap Used: 50 MB -- End of processItem
+DEFAULT 2024-02-16T17:18:08.760463Z Processing item: 1PY1aAwaJLxKIUEQjrjLoRde7Mgl9i8b6
+DEFAULT 2024-02-16T17:18:08.760543Z Memory Usage: RSS: 207 MB, Heap Total: 55 MB, Heap Used: 50 MB -- Start downloading file
+DEFAULT 2024-02-16T17:18:09.265373Z Memory Usage: RSS: 183 MB, Heap Total: 56 MB, Heap Used: 48 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:18:09.265817Z Memory Usage: RSS: 183 MB, Heap Total: 56 MB, Heap Used: 48 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:18:09.265909Z Memory Usage: RSS: 183 MB, Heap Total: 56 MB, Heap Used: 48 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:18:11.804536Z Memory Usage: RSS: 258 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:18:11.804556Z Image transformation and upload successful for 1PY1aAwaJLxKIUEQjrjLoRde7Mgl9i8b6 -> 1sP40lzaBTpbLeouP_wYjXx5qIe-3bTev
+DEFAULT 2024-02-16T17:18:11.804627Z Memory Usage: RSS: 258 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:18:11.804655Z Processing item: 12Rc-mvqlFxon5J7yRdrggzkJLiVdY1xq
+DEFAULT 2024-02-16T17:18:11.804726Z Memory Usage: RSS: 258 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:18:12.543259Z Memory Usage: RSS: 258 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:18:12.543551Z Memory Usage: RSS: 258 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:18:12.543639Z Memory Usage: RSS: 258 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:18:15.318767Z Memory Usage: RSS: 337 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:18:15.318787Z Image transformation and upload successful for 12Rc-mvqlFxon5J7yRdrggzkJLiVdY1xq -> 1Z9R-samNe4suwmlQ6mgxDI7awutP7YqM
+DEFAULT 2024-02-16T17:18:15.318852Z Memory Usage: RSS: 337 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:18:15.319395Z Processing item: 1NZryLei6TIoYAgKsVuTtxmGeUfxYMg_Q
+DEFAULT 2024-02-16T17:18:15.319404Z Memory Usage: RSS: 337 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:18:16.131430Z Memory Usage: RSS: 337 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:18:16.131738Z Memory Usage: RSS: 337 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:18:16.131829Z Memory Usage: RSS: 337 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:18:18.735324Z Memory Usage: RSS: 414 MB, Heap Total: 55 MB, Heap Used: 50 MB -- End upload to drive
+DEFAULT 2024-02-16T17:18:18.735429Z Image transformation and upload successful for 1NZryLei6TIoYAgKsVuTtxmGeUfxYMg_Q -> 1V1xP82epMTR0u4mTQ8YpecxPYZWrAoPl
+DEFAULT 2024-02-16T17:18:18.735567Z Memory Usage: RSS: 414 MB, Heap Total: 55 MB, Heap Used: 50 MB -- End of processItem
+DEFAULT 2024-02-16T17:18:18.735854Z Processing item: 1OieVSNnWpQaK4Cvwnw3L_4pTVpqraez9
+DEFAULT 2024-02-16T17:18:18.736059Z Memory Usage: RSS: 414 MB, Heap Total: 55 MB, Heap Used: 50 MB -- Start downloading file
+DEFAULT 2024-02-16T17:18:19.498917Z Memory Usage: RSS: 415 MB, Heap Total: 56 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:18:19.499252Z Memory Usage: RSS: 415 MB, Heap Total: 56 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:18:19.499371Z Memory Usage: RSS: 415 MB, Heap Total: 56 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:18:22.482685Z Memory Usage: RSS: 459 MB, Heap Total: 55 MB, Heap Used: 50 MB -- End upload to drive
+DEFAULT 2024-02-16T17:18:22.482724Z Image transformation and upload successful for 1OieVSNnWpQaK4Cvwnw3L_4pTVpqraez9 -> 15bRbx25KPF_8JRGNGx0xVjCnIjBuXuXz
+DEFAULT 2024-02-16T17:18:22.482831Z Memory Usage: RSS: 459 MB, Heap Total: 55 MB, Heap Used: 50 MB -- End of processItem
+DEFAULT 2024-02-16T17:18:22.482863Z Processing item: 1y4lZauPpgJkXTQEIDPD5cNtP9IcQDc_z
+DEFAULT 2024-02-16T17:18:22.482994Z Memory Usage: RSS: 459 MB, Heap Total: 55 MB, Heap Used: 50 MB -- Start downloading file
+DEFAULT 2024-02-16T17:18:23.262282Z Memory Usage: RSS: 459 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:18:23.262655Z Memory Usage: RSS: 459 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:18:23.262782Z Memory Usage: RSS: 459 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:18:25.768596Z Memory Usage: RSS: 481 MB, Heap Total: 55 MB, Heap Used: 48 MB -- End upload to drive
+DEFAULT 2024-02-16T17:18:25.768796Z Image transformation and upload successful for 1y4lZauPpgJkXTQEIDPD5cNtP9IcQDc_z -> 1axUSnuT6Rpo78XCWTBHJn8JJKZe2Qztx
+DEFAULT 2024-02-16T17:18:25.769066Z Memory Usage: RSS: 481 MB, Heap Total: 55 MB, Heap Used: 48 MB -- End of processItem
+DEFAULT 2024-02-16T17:18:25.769293Z Processing item: 1IsjsMTH9ge0awL8PKM31r5ixj7PGmjrg
+DEFAULT 2024-02-16T17:18:25.769365Z Memory Usage: RSS: 481 MB, Heap Total: 55 MB, Heap Used: 48 MB -- Start downloading file
+DEFAULT 2024-02-16T17:18:26.883628Z Memory Usage: RSS: 481 MB, Heap Total: 55 MB, Heap Used: 48 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:18:26.883970Z Memory Usage: RSS: 481 MB, Heap Total: 55 MB, Heap Used: 48 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:18:26.883995Z Memory Usage: RSS: 481 MB, Heap Total: 55 MB, Heap Used: 48 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:18:29.299055Z Memory Usage: RSS: 503 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:18:29.299070Z Image transformation and upload successful for 1IsjsMTH9ge0awL8PKM31r5ixj7PGmjrg -> 1-KSssP2-bxKVKTmnwrh3BqQMzsjfCjv2
+DEFAULT 2024-02-16T17:18:29.299239Z Memory Usage: RSS: 503 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:18:29.299281Z Processing item: 1ZERUGvJwpgj7G10vbf0ZL-VtaPToKQa_
+DEFAULT 2024-02-16T17:18:29.299388Z Memory Usage: RSS: 503 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:18:30.285622Z Memory Usage: RSS: 503 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:18:30.285952Z Memory Usage: RSS: 503 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:18:30.286030Z Memory Usage: RSS: 503 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:18:32.901090Z Memory Usage: RSS: 528 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:18:32.901116Z Image transformation and upload successful for 1ZERUGvJwpgj7G10vbf0ZL-VtaPToKQa_ -> 1ylQ3-bhlWs3NfvEQJJ8w2febWzK7mkTa
+DEFAULT 2024-02-16T17:18:32.901186Z Memory Usage: RSS: 528 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:18:32.901215Z Processing item: 1O2Yfy6W3p6DBFS0HgseQBpKB1YzT9u6_
+DEFAULT 2024-02-16T17:18:32.901287Z Memory Usage: RSS: 528 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:18:34.515044Z Memory Usage: RSS: 528 MB, Heap Total: 55 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:18:34.515479Z Memory Usage: RSS: 528 MB, Heap Total: 55 MB, Heap Used: 49 MB -- End of sharp.js transformation
+
+
+This a second run with more pictures:
+
+DEFAULT 2024-02-16T17:47:20.876396Z Memory Usage: RSS: 497 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:20.876416Z Image transformation and upload successful for 1ucWdR-C-_aLnnjsQQWSS1h-ZG2bA3YpQ -> 1jfYk5mq5PFVpvZtdJYc_9VVV8lIAgCHg
+DEFAULT 2024-02-16T17:47:20.876512Z Memory Usage: RSS: 497 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:20.876521Z Processing item: 1R2HoCw7CXr_LPpXJtQxX4jkZ_zVLtKkK
+DEFAULT 2024-02-16T17:47:20.876578Z Memory Usage: RSS: 497 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:22.036288Z Memory Usage: RSS: 497 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:22.036661Z Memory Usage: RSS: 497 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:22.036746Z Memory Usage: RSS: 497 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:24.152700Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:24.152754Z Image transformation and upload successful for 1R2HoCw7CXr_LPpXJtQxX4jkZ_zVLtKkK -> 19-OaestGIz5rkljsz9fpmJ9vHjbmEvQr
+DEFAULT 2024-02-16T17:47:24.152849Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:24.152856Z Processing item: 1tKCFxdfBsJJ7CRjRiCqSvB6PC7ZiVbp9
+DEFAULT 2024-02-16T17:47:24.152943Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:24.889072Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 48 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:24.889473Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 48 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:24.889542Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 48 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:27.575377Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:27.575411Z Image transformation and upload successful for 1tKCFxdfBsJJ7CRjRiCqSvB6PC7ZiVbp9 -> 1koBhAN_3D7bD76LT3E8m1nstbZ7JSh_Q
+DEFAULT 2024-02-16T17:47:27.575530Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:27.575540Z Processing item: 1hbtdEm-bNt1sCKZl8o26cI39O_Q43pcf
+DEFAULT 2024-02-16T17:47:27.575638Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:28.531376Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:28.531627Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:28.531721Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:30.851940Z Memory Usage: RSS: 520 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:30.851958Z Image transformation and upload successful for 1hbtdEm-bNt1sCKZl8o26cI39O_Q43pcf -> 1Ea5MALA94APTIMNRjr7H8VxLOHD5WGzy
+DEFAULT 2024-02-16T17:47:30.852040Z Memory Usage: RSS: 520 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:30.852050Z Processing item: 1Le4lSLbDeLXRO89eDZ1DS5I1ZTbFTqr6
+DEFAULT 2024-02-16T17:47:30.852133Z Memory Usage: RSS: 520 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:31.572251Z Memory Usage: RSS: 520 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:31.572454Z Memory Usage: RSS: 520 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:31.572519Z Memory Usage: RSS: 520 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:33.879573Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:33.879591Z Image transformation and upload successful for 1Le4lSLbDeLXRO89eDZ1DS5I1ZTbFTqr6 -> 1fyG_BwsL83z38C1LIVcwWLP_j1JRvN3S
+DEFAULT 2024-02-16T17:47:33.879750Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:33.879757Z Processing item: 1VQRdvCsJNWmN7VFAP4pxSkOydGeYa_sm
+DEFAULT 2024-02-16T17:47:33.879843Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:34.757821Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:34.758022Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:34.758091Z Memory Usage: RSS: 519 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:37.221550Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:37.221563Z Image transformation and upload successful for 1VQRdvCsJNWmN7VFAP4pxSkOydGeYa_sm -> 1VsI06IvsLS-j1-W39ZvIM69CxBRqBmRv
+DEFAULT 2024-02-16T17:47:37.221670Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:37.221755Z Processing item: 1flwSwFWHRVqECETqBxB_syFOX7r68H2G
+DEFAULT 2024-02-16T17:47:37.221761Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:38.294147Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:38.294368Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:38.294423Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:40.673772Z Memory Usage: RSS: 545 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:40.673790Z Image transformation and upload successful for 1flwSwFWHRVqECETqBxB_syFOX7r68H2G -> 1iiH2j1op3Qu8g3RrUo9Wb8AtYIyCKKcQ
+DEFAULT 2024-02-16T17:47:40.673853Z Memory Usage: RSS: 545 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:40.673861Z Processing item: 1XFtcdwD10Pv_kz19sybIPp1x9Kv6Kdyp
+DEFAULT 2024-02-16T17:47:40.673935Z Memory Usage: RSS: 545 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:41.535400Z Memory Usage: RSS: 545 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:41.535577Z Memory Usage: RSS: 545 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:41.535682Z Memory Usage: RSS: 545 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:43.939379Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:43.939394Z Image transformation and upload successful for 1XFtcdwD10Pv_kz19sybIPp1x9Kv6Kdyp -> 1Fckbfy7-iQqbmCp2nzZpxWmgEk4ZaQwr
+DEFAULT 2024-02-16T17:47:43.939454Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:43.939481Z Processing item: 1FOdEL0mIAHgam5apuKogAltyjl4dpnYu
+DEFAULT 2024-02-16T17:47:43.939553Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:44.808499Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:44.808737Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:44.808806Z Memory Usage: RSS: 521 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:47.054770Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:47.054782Z Image transformation and upload successful for 1FOdEL0mIAHgam5apuKogAltyjl4dpnYu -> 1ZMfPkUiHFukrxj1we_wm9ONVj33QK5Do
+DEFAULT 2024-02-16T17:47:47.054928Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:47.054940Z Processing item: 1KDsPgeemZUM6BBXrlRkXhy2iAqiZFzgN
+DEFAULT 2024-02-16T17:47:47.054988Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:47.889123Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 48 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:47.889345Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 48 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:47.889430Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 48 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:50.144753Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:50.144765Z Image transformation and upload successful for 1KDsPgeemZUM6BBXrlRkXhy2iAqiZFzgN -> 13d0ZeObISJLD4myXcLZVs-fTtfHjJCNJ
+DEFAULT 2024-02-16T17:47:50.144836Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:50.144849Z Processing item: 1tjf46RmnoImpIQ515TGWAbTxNze4Pqsh
+DEFAULT 2024-02-16T17:47:50.144919Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:50.982045Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:50.982453Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:50.982569Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:53.447349Z Memory Usage: RSS: 549 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:53.447371Z Image transformation and upload successful for 1tjf46RmnoImpIQ515TGWAbTxNze4Pqsh -> 1vIcbQEP33T_RkQtWQuScwohJDMcC2Img
+DEFAULT 2024-02-16T17:47:53.447419Z Memory Usage: RSS: 549 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:53.447429Z Processing item: 1MIrWkWqdPQwlRmQMleWlKCMoCy4bboJx
+DEFAULT 2024-02-16T17:47:53.447506Z Memory Usage: RSS: 549 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:54.240176Z Memory Usage: RSS: 549 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:54.240388Z Memory Usage: RSS: 549 MB, Heap Total: 52 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:54.240454Z Memory Usage: RSS: 549 MB, Heap Total: 52 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:47:56.650908Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:47:56.650947Z Image transformation and upload successful for 1MIrWkWqdPQwlRmQMleWlKCMoCy4bboJx -> 1PQUbfRy1Qtmq4ouPbWpkAShb_C2ivEdS
+DEFAULT 2024-02-16T17:47:56.651015Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:47:56.651027Z Processing item: 1G9ZHFP-v7f1A4s3xd_TrWjAnLvD3rw2j
+DEFAULT 2024-02-16T17:47:56.651112Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:47:57.518957Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:47:57.519147Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:47:57.519227Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:48:00.098584Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:48:00.098604Z Image transformation and upload successful for 1G9ZHFP-v7f1A4s3xd_TrWjAnLvD3rw2j -> 1_wvNzz2nFaWLe62C5eCQOgjtOZKPsoiJ
+DEFAULT 2024-02-16T17:48:00.098708Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:48:00.098728Z Processing item: 1V_O1r1x5LT3szSRvmwPTzGBLQod3t6XO
+DEFAULT 2024-02-16T17:48:00.099137Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:48:01.637758Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:48:01.638018Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:48:01.638095Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:48:04.250730Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 48 MB -- End upload to drive
+DEFAULT 2024-02-16T17:48:04.250755Z Image transformation and upload successful for 1V_O1r1x5LT3szSRvmwPTzGBLQod3t6XO -> 1t0v_OwXnS_lgnoF7CTns4NbteZUpYbix
+DEFAULT 2024-02-16T17:48:04.250767Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 48 MB -- End of processItem
+DEFAULT 2024-02-16T17:48:04.250777Z Processing item: 15KS5FcQk1V5opS3SLMj-TCtyGeSh7UOi
+DEFAULT 2024-02-16T17:48:04.250885Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:48:05.407567Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:48:05.407784Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:48:05.407845Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:48:07.690478Z Memory Usage: RSS: 549 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:48:07.690500Z Image transformation and upload successful for 15KS5FcQk1V5opS3SLMj-TCtyGeSh7UOi -> 1L7theXjnMyLB5AA7q26p6WWUZ2rR4Ox7
+DEFAULT 2024-02-16T17:48:07.690542Z Memory Usage: RSS: 549 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:48:07.690568Z Processing item: 1GOE52Fc-UiVlm_0vpuH4DuxO-VS88OTr
+DEFAULT 2024-02-16T17:48:07.690635Z Memory Usage: RSS: 549 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:48:09.055038Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:48:09.055283Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:48:09.055344Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:48:11.887285Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End upload to drive
+DEFAULT 2024-02-16T17:48:11.887355Z Image transformation and upload successful for 1GOE52Fc-UiVlm_0vpuH4DuxO-VS88OTr -> 1zbx9aDKpgCUzwDJbMokRpcTWWxnflik7
+DEFAULT 2024-02-16T17:48:11.887371Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- End of processItem
+DEFAULT 2024-02-16T17:48:11.887448Z Processing item: 1u-RmmJfrDdxXpEj5q8wCUQU1NdAGQ4bC
+DEFAULT 2024-02-16T17:48:11.887532Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 49 MB -- Start downloading file
+DEFAULT 2024-02-16T17:48:12.742445Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 48 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:48:12.742794Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 48 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:48:12.742809Z Memory Usage: RSS: 523 MB, Heap Total: 51 MB, Heap Used: 48 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:48:16.208992Z Memory Usage: RSS: 524 MB, Heap Total: 51 MB, Heap Used: 48 MB -- End upload to drive
+DEFAULT 2024-02-16T17:48:16.209006Z Image transformation and upload successful for 1u-RmmJfrDdxXpEj5q8wCUQU1NdAGQ4bC -> 1gaSjkCLH_DCh_1Nd1OSzqrvf0ALAXL5L
+DEFAULT 2024-02-16T17:48:16.209086Z Memory Usage: RSS: 524 MB, Heap Total: 51 MB, Heap Used: 48 MB -- End of processItem
+DEFAULT 2024-02-16T17:48:16.209108Z Processing item: 1LBu4-4J-hT23BOehL0R1fjo4Mpi8v05A
+DEFAULT 2024-02-16T17:48:16.209164Z Memory Usage: RSS: 524 MB, Heap Total: 51 MB, Heap Used: 48 MB -- Start downloading file
+DEFAULT 2024-02-16T17:48:17.110173Z Memory Usage: RSS: 524 MB, Heap Total: 51 MB, Heap Used: 48 MB -- Finish Downloading, now sending to sharp.js
+DEFAULT 2024-02-16T17:48:17.110487Z Memory Usage: RSS: 524 MB, Heap Total: 51 MB, Heap Used: 48 MB -- End of sharp.js transformation
+DEFAULT 2024-02-16T17:48:17.110547Z Memory Usage: RSS: 524 MB, Heap Total: 51 MB, Heap Used: 48 MB -- Start upload to drive
+DEFAULT 2024-02-16T17:48:19.727107Z Memory Usage: RSS: 524 MB, Heap Total: 51 MB, Heap Used: 48 MB -- End upload to drive
+DEFAULT 2024-02-16T17:48:19.727127Z Image transformation and upload successful for 1LBu4-4J-hT23BOehL0R1fjo4Mpi8v05A -> 1cxjg3pEgav4bFBz7DHbuYVhr5j2_8XPl
+DEFAULT 2024-02-16T17:48:19.727192Z Memory Usage: RSS: 524 MB, Heap Total: 51 MB, Heap Used: 48 MB -- End of processItem
+INFO 2024-02-16T18:01:27.657533Z [pid1] Received terminated signal [session:8WPB54M]

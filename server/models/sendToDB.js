@@ -13,6 +13,7 @@ async function withExponentialBackoff(operation, maxRetries = 5) {
     let retryCount = 0;
     let delay = 1000;
     while (retryCount < maxRetries) {
+        console.log(`Retry: ${retryCount}`);
         try {
             return await operation();
         } catch (error) {
@@ -85,16 +86,15 @@ async function transformAndUploadImage(arr) {
             logMemoryUsage('Start upload to drive')
             const newId = await withExponentialBackoff(() => uploadFile(transformedStream, 'image/jpeg', updatedFolderId, newFileName));
             logMemoryUsage('End upload to drive')
+
+            stream.destroy();
             transformedStream.destroy();
+            stream = null;
+            transformedStream = null;
             console.log(`Image transformation and upload successful for ${fileId} -> ${newId}`);
         } catch (error) {
             console.error(`Error in image transformation for ${item.fileId}:`, error);
             retryItems.push(item);
-        } finally {
-            if (stream && typeof stream.destroy === 'function') {
-                stream.destroy();
-            }
-            stream = null; 
         }
     }
 
