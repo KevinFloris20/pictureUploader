@@ -1,19 +1,20 @@
 const path = require('path');
-const { uploadFile, createFolder, downloadFile } = require('./googleDriveService');
+const { uploadFile, createFolder, downloadFile, uploadFile2 } = require('./googleDriveService');
 const { convertToJpgAndOptimizeSize } = require('./editImg');
 const MAIN_FOLDER_ID = '1wlKANogfrk5cTnpCEAlX-mpMU26VQ5m0';
 const { Readable } = require('stream');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
 
 const logMemoryUsage = (message) => {
     const memoryUsage = process.memoryUsage();
-    console.log(`Memory Usage: RSS: ${Math.round(memoryUsage.rss / 1024 / 1024)} MB, Heap Total: ${Math.round(memoryUsage.heapTotal / 1024 / 1024)} MB, Heap Used: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB -- ${message}`);
+    console.log(`Memory Usage: RSS: ${Math.round(memoryUsage.rss / 1024 / 1024)} MB, External: ${Math.round(memoryUsage.external / 1024 / 1024)} MB, Heap Total: ${Math.round(memoryUsage.heapTotal / 1024 / 1024)} MB, Heap Used: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB -- ${message}`);
 };
 
 async function withExponentialBackoff(operation, maxRetries = 5) {
     let retryCount = 0;
     let delay = 1000;
     while (retryCount < maxRetries) {
-        console.log(`Retry: ${retryCount}`);
         try {
             return await operation();
         } catch (error) {
@@ -69,47 +70,57 @@ send them to sharp.js for transformation, and then
 takes the stream from sharp and reuploads them
 into the updated folder and a new folder*/
 async function transformAndUploadImage(arr) {
-    let retryItems = [];
-
-    async function processItem(item) {
-        let stream = null;
-        try {
-            const { fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname } = item;
-            logMemoryUsage('Start downloading file')
-            stream = await downloadFile(fileId);
-            logMemoryUsage('Finish Downloading, now sending to sharp.js')
-            let transformedStream = convertToJpgAndOptimizeSize(stream);
-            logMemoryUsage('End of sharp.js transformation')
-
-            const newFileName = `Updated-${path.parse(originalname).name}.jpg`;
-            const updatedFolderId = fieldname === 'beforePic' ? updatedBeforeFolderId : updatedAfterFolderId;
-            logMemoryUsage('Start upload to drive')
-            const newId = await withExponentialBackoff(() => uploadFile(transformedStream, 'image/jpeg', updatedFolderId, newFileName));
-            logMemoryUsage('End upload to drive')
-
-            stream.destroy();
-            transformedStream.destroy();
-            stream = null;
-            transformedStream = null;
-            console.log(`Image transformation and upload successful for ${fileId} -> ${newId}`);
-        } catch (error) {
-            console.error(`Error in image transformation for ${item.fileId}:`, error);
-            retryItems.push(item);
-        }
+    // experimental http request to microservice
+    const url = 'https://pumicroservice-np3zyyh5fa-uk.a.run.app/transform-upload-images'
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ imageIds: arr }), 
+        });
+        const data = await response.json();
+        console.log(data.message);
+    } catch (error) {
+        console.error('Error:', error);
     }
 
-    for (const item of arr) {
-        console.log(`Processing item: ${item.fileId}`)
-        await processItem(item);
-        logMemoryUsage('End of processItem')
-    }
+    // let retryItems = [];
 
-    if (retryItems.length > 0) {
-        console.log(`Retrying failed items...`);
-        for (const item of retryItems) {
-            await processItem(item);
-        }
-    }
+    // async function processItem(item) {
+    //     try {
+    //         const { fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname } = item;
+    //         logMemoryUsage('Start downloading file')
+    //         const downloadStream = await downloadFile(fileId);
+    //         // logMemoryUsage('Finish Downloading, now sending to sharp.js')
+    //         // const transformedStream = convertToJpgAndOptimizeSize(downloadStream);
+    //         // logMemoryUsage('End of sharp.js transformation')
+
+    //         const newFileName = `Updated-${path.parse(originalname).name}.jpg`;
+    //         const updatedFolderId = fieldname === 'beforePic' ? updatedBeforeFolderId : updatedAfterFolderId;
+    //         logMemoryUsage('Start upload to drive')
+    //         const newId = await withExponentialBackoff(() => uploadFile2(convertToJpgAndOptimizeSize(downloadStream), 'application/octet-stream', updatedFolderId, newFileName));
+    //         logMemoryUsage('End upload to drive')
+    //         console.log(`Image transformation and upload successful for ${fileId} -> ${newId}`);
+    //     } catch (error) {
+    //         console.error(`Error in image transformation for ${item.fileId}:`, error);
+    //         retryItems.push(item);
+    //     }
+    // }
+
+    // for (const item of arr) {
+    //     console.log(`Processing item: ${item.fileId}`)
+    //     await processItem(item);
+    //     logMemoryUsage('End of processItem')
+    // }
+
+    // if (retryItems.length > 0) {
+    //     console.log(`Retrying failed items...`);
+    //     for (const item of retryItems) {
+    //         await processItem(item);
+    //     }
+    // }
 }
 
 module.exports = { processAndUploadImages, makeFirstFolder };

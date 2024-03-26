@@ -1,6 +1,7 @@
 const { google } = require('googleapis');
 require('dotenv').config({ path: 'cred.env' });
 
+
 const auth = new google.auth.GoogleAuth({
     keyFile: process.env.KEYFILEPATH,
     scopes: ['https://www.googleapis.com/auth/drive'],
@@ -26,6 +27,31 @@ async function uploadFile(stream, mimeType, folderId, fileName) {
     stream.destroy();
     return id
 }
+async function uploadFile2(stream, mimeType, folderId, fileName) {
+    try {
+      const response = await drive.files.create({
+        requestBody: {
+          name: fileName,
+          parents: [folderId],
+          mimeType,
+        },
+        media: {
+          mimeType,
+          body: stream, 
+        },
+        fields: 'id',
+      });
+      return response.data.id;
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      stream.destroy();
+      throw error;
+    } finally {
+      stream.destroy();
+      stream = null;
+    }
+  }
+  
 
 
 async function createFolder(name, parentFolderId = null) {
@@ -49,4 +75,4 @@ async function downloadFile(fileId) {
     return response.data; 
 }
 
-module.exports = { uploadFile, createFolder, downloadFile };
+module.exports = { uploadFile, createFolder, downloadFile, uploadFile2};

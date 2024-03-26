@@ -3,10 +3,10 @@ sharp.cache(false);
 sharp.concurrency(1);
 
 function convertToJpgAndOptimizeSize(inputStream) {
-    return inputStream.pipe(sharp().rotate().withMetadata().jpeg({
-        quality: 80,
-        progressive: true,
-    }));
+    return inputStream.pipe(sharp().rotate().withMetadata()).jpeg({
+      quality: 80,
+      progressive: true,
+    });
 }
 
 async function getMimeType(buffer) {

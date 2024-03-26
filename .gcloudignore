@@ -15,4 +15,7 @@
 # Node.js dependencies:
 node_modules/
 
+# PUmicroService folder must be ignored
+PUmicroService/
+
 uploads
