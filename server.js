@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const appRoutes = require('./server/routes');
+require('http').globalAgent.maxSockets = require('https').globalAgent.maxSockets = 100;
+
 
 const app = express();
 const port = 3069;
