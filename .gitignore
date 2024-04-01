@@ -2,3 +2,6 @@ node_modules
 cred.env
 uploads
 uploadfcrphotos-8c67dc432663.json
+# docker build -t pumicroservice .
+# docker tag pumicroservice us-east4-docker.pkg.dev/uploadfcrphotos/pumicroservicerepo/pumicroservice
+# docker push us-east4-docker.pkg.dev/uploadfcrphotos/pumicroservicerepo/pumicroservice

@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 const bodyParser = require('body-parser');
 const path = require('path');
+const { Readable } = require('stream');
+const { pipeline } = require('stream');
+const util = require('util');
+const pipelineAsync = util.promisify(pipeline);
 
 
 
@@ -12,48 +16,65 @@ sharp.cache(false);
 sharp.concurrency(1);
 function convertToJpgAndOptimizeSize(inputStream) {
     return inputStream.pipe(sharp().rotate().withMetadata()).jpeg({
-      quality: 80,
-      progressive: true,
+        quality: 80,
+        progressive: true,
     });
 }
 
 /*This is the google drive setup*/
-const { google } = require('googleapis');
 require('dotenv').config({ path: 'cred.env' });
-const auth = new google.auth.GoogleAuth({
-    keyFile: process.env.KEYFILEPATH,
-    scopes: ['https://www.googleapis.com/auth/drive'],
-});
-const drive = google.drive({ version: 'v3', auth });
+const { GoogleAuth } = require('google-auth-library');
+const axios = require('axios');
+const FormData = require('form-data');
 
-
-/*This function is used to upload the file to drive*/
-async function uploadFile(stream, mimeType, folderId, fileName) {
-    let response = await drive.files.create({
-        requestBody: {
-            name: fileName,
-            parents: [folderId],
-            mimeType,
-        },
-        media: {
-            mimeType,
-            body: stream,
-        },
-        fields: 'id',
+async function getAccessToken() {
+    const auth = new GoogleAuth({
+        keyFile: process.env.KEYFILEPATH,
+        scopes: ['https://www.googleapis.com/auth/drive'],
     });
-    const id = response.data.id;
-    response = null;
-    stream.destroy();
-    return id
+    const client = await auth.getClient();
+    const accessToken = await client.getAccessToken();
+    return accessToken.token;
 }
 
-/*This function is used to download the file from drive*/
+async function uploadFile(stream, mimeType, folderId, fileName) {
+  const accessToken = await getAccessToken();
+  const formData = new FormData();
+  formData.append('metadata', JSON.stringify({
+      name: fileName,
+      parents: [folderId]
+  }), {
+      contentType: 'application/json'
+  });
+  formData.append('file', stream, {
+      filename: fileName,
+      contentType: mimeType,
+  });
+
+  const response = await axios.post('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', formData, {
+      headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          ...formData.getHeaders(),
+      },
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
+  });
+
+  console.log(`Image transformation and upload successful for new file: ${response.data.id}`);
+  return 0
+}
+
 async function downloadFile(fileId) {
-    const response = await drive.files.get({
-        fileId,
-        alt: 'media',
-    }, { responseType: 'stream' });
-    return response.data; 
+  const accessToken = await getAccessToken();
+  const response = await axios({
+      url: `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
+      method: 'GET',
+      responseType: 'stream',
+      headers: {
+          'Authorization': `Bearer ${accessToken}`,
+      },
+  });
+  return response.data;
 }
 
 
@@ -83,28 +104,45 @@ async function transformAndUploadImage(arr) {
     async function processItem(item) {
         try {
             const { fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname } = item;
-            logMemoryUsage('Start downloading file')
+            logMemoryUsage('Start downloading file');
             const downloadStream = await downloadFile(fileId);
-            logMemoryUsage('Finish Downloading, now sending to sharp.js')
+            if (!(downloadStream instanceof Readable)) {
+                console.log('downloadStream is not a Stream');
+                return; 
+            }
+            logMemoryUsage('Finish Downloading, now sending to sharp.js');
+    
             const transformedStream = convertToJpgAndOptimizeSize(downloadStream);
-            logMemoryUsage('End of sharp.js transformation')
-
+            if (!(transformedStream instanceof Readable)) {
+                console.log('transformedStream is not a Stream');
+                return; 
+            }
+            logMemoryUsage('End of sharp.js transformation');
+    
             const newFileName = `Updated-${path.parse(originalname).name}.jpg`;
             const updatedFolderId = fieldname === 'beforePic' ? updatedBeforeFolderId : updatedAfterFolderId;
-            logMemoryUsage('Start upload to drive')
-            const newId = await withExponentialBackoff(() => uploadFile(transformedStream, 'application/octet-stream', updatedFolderId, newFileName));
-            logMemoryUsage('End upload to drive')
-            console.log(`Image transformation and upload successful for ${fileId} -> ${newId}`);
+    
+            logMemoryUsage('Start upload to drive');
+            const x = await pipelineAsync(
+                transformedStream,
+                async function (source) {
+                    await uploadFile(source, 'image/jpeg', updatedFolderId, newFileName);
+                }
+            );
+            logMemoryUsage('End upload to drive');
+            return 0;
         } catch (error) {
             console.error(`Error in image transformation for ${item.fileId}:`, error);
         }
+        return 0;
     }
-
+    
     for (const item of arr) {
-        console.log(`Processing item: ${item.fileId}`)
-        await processItem(item);
-        logMemoryUsage('End of processItem')
+        console.log(`Processing item: ${item.fileId}`);
+        const x = await processItem(item);
+        logMemoryUsage('End of processItem');
     }
+    return 0;
 }
 
 
@@ -119,7 +157,7 @@ app.post('/transform-upload-images', async (req, res) => {
     }
 
     try {
-        await transformAndUploadImage(imageIds);
+        const x = await transformAndUploadImage(imageIds);
         res.send({ message: 'Images processed successfully.' });
     } catch (error) {
         console.error('Failed to process images:', error);

@@ -27,32 +27,6 @@ async function uploadFile(stream, mimeType, folderId, fileName) {
     stream.destroy();
     return id
 }
-// async function uploadFile2(stream, mimeType, folderId, fileName) {
-//     try {
-//       const response = await drive.files.create({
-//         requestBody: {
-//           name: fileName,
-//           parents: [folderId],
-//           mimeType,
-//         },
-//         media: {
-//           mimeType,
-//           body: stream, 
-//         },
-//         fields: 'id',
-//       });
-//       return response.data.id;
-//     } catch (error) {
-//       console.error("Error uploading file:", error);
-//       stream.destroy();
-//       throw error;
-//     } finally {
-//       stream.destroy();
-//       stream = null;
-//     }
-//   }
-  
-
 
 async function createFolder(name, parentFolderId = null) {
     const fileMetadata = {
@@ -80,13 +54,11 @@ async function downloadFile(fileId) {
 ////////fancy tech stuff below
 const { GoogleAuth } = require('google-auth-library');
 const axios = require('axios');
-const fs = require('fs');
 const FormData = require('form-data');
 
-// Function to obtain access token using GoogleAuth library
 async function getAccessToken() {
     const auth = new GoogleAuth({
-        keyFile: 'path/to/your/service-account-file.json',
+        keyFile: process.env.KEYFILEPATH,
         scopes: ['https://www.googleapis.com/auth/drive'],
     });
     const client = await auth.getClient();
@@ -94,30 +66,34 @@ async function getAccessToken() {
     return accessToken.token;
 }
 
-// Function to upload file to Google Drive
-async function uploadFile2(filePath, mimeType, folderId, fileName) {
-    const accessToken = await getAccessToken();
-    const formData = new FormData();
-    formData.append('metadata', new Blob([JSON.stringify({
-        name: fileName,
-        parents: [folderId],
-    })], { type: 'application/json' }));
-    formData.append('file', fs.createReadStream(filePath), {
-        filename: fileName,
-        contentType: mimeType,
-    });
+async function uploadFile2(stream, mimeType, folderId, fileName) {
+  const accessToken = await getAccessToken();
+  const formData = new FormData();
+  formData.append('metadata', JSON.stringify({
+      name: fileName,
+      parents: [folderId]
+  }), {
+      contentType: 'application/json'
+  });
+  formData.append('file', stream, {
+      filename: fileName,
+      contentType: mimeType,
+  });
 
-    const response = await axios.post('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', formData, {
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            ...formData.getHeaders(),
-        },
-    });
+  const response = await axios.post('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', formData, {
+      headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          ...formData.getHeaders(),
+      },
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
+  });
 
-    return response.data; 
+  console.log(`Image transformation and upload successful for new file: ${response.data.id}`);
+  return 0
 }
 
-async function downloadFile2(fileId, destinationPath) {
+async function downloadFile2(fileId) {
   const accessToken = await getAccessToken();
   const response = await axios({
       url: `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
@@ -127,14 +103,9 @@ async function downloadFile2(fileId, destinationPath) {
           'Authorization': `Bearer ${accessToken}`,
       },
   });
-
-  return new Promise((resolve, reject) => {
-      const writer = fs.createWriteStream(destinationPath);
-      response.data.pipe(writer);
-      writer.on('error', reject);
-      writer.on('finish', resolve);
-  });
+  return response.data;
 }
+
 
 
 module.exports = { uploadFile, createFolder, downloadFile, uploadFile2, downloadFile2};

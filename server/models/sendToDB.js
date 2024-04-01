@@ -3,11 +3,6 @@ const { uploadFile, createFolder, downloadFile, uploadFile2, downloadFile2 } = r
 const { convertToJpgAndOptimizeSize } = require('./editImg');
 const MAIN_FOLDER_ID = '1wlKANogfrk5cTnpCEAlX-mpMU26VQ5m0';
 const { Readable } = require('stream');
-// const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-// const fs = require('fs');
-// const { promisify } = require('util');
-// const stream = require('stream');
-// const finished = promisify(stream.finished);
 const { pipeline } = require('stream');
 const util = require('util');
 const pipelineAsync = util.promisify(pipeline);
@@ -78,64 +73,64 @@ send them to sharp.js for transformation, and then
 takes the stream from sharp and reuploads them
 into the updated folder and a new folder*/
 async function transformAndUploadImage(arr) {
-    // const url = 'https://pumicroservice-np3zyyh5fa-uk.a.run.app/transform-upload-images'
-    // try {
-    //     const response = await fetch(url, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ imageIds: arr }), 
-    //     });
-    //     const data = await response.json();
-    //     console.log(data.message);
-    // } catch (error) {
-    //     console.error('Error:', error);
-    // }
+    const url = 'https://pumicroservice-np3zyyh5fa-uk.a.run.app/transform-upload-images'
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ imageIds: arr }), 
+        });
+        const data = await response.json();
+        console.log(data.message);
+    } catch (error) {
+        console.error('Error:', error);
+    }
 
     
-    async function processItem(item) {
-        try {
-            const { fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname } = item;
-            logMemoryUsage('Start downloading file');
-            const downloadStream = await downloadFile2(fileId);
-            if (!(downloadStream instanceof Readable)) {
-                console.log('downloadStream is not a Stream');
-                return; 
-            }
-            logMemoryUsage('Finish Downloading, now sending to sharp.js');
+    // async function processItem(item) {
+    //     try {
+    //         const { fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname } = item;
+    //         logMemoryUsage('Start downloading file');
+    //         const downloadStream = await downloadFile2(fileId);
+    //         if (!(downloadStream instanceof Readable)) {
+    //             console.log('downloadStream is not a Stream');
+    //             return; 
+    //         }
+    //         logMemoryUsage('Finish Downloading, now sending to sharp.js');
     
-            const transformedStream = convertToJpgAndOptimizeSize(downloadStream);
-            if (!(transformedStream instanceof Readable)) {
-                console.log('transformedStream is not a Stream');
-                return; 
-            }
-            logMemoryUsage('End of sharp.js transformation');
+    //         const transformedStream = convertToJpgAndOptimizeSize(downloadStream);
+    //         if (!(transformedStream instanceof Readable)) {
+    //             console.log('transformedStream is not a Stream');
+    //             return; 
+    //         }
+    //         logMemoryUsage('End of sharp.js transformation');
     
-            const newFileName = `Updated-${path.parse(originalname).name}.jpg`;
-            const updatedFolderId = fieldname === 'beforePic' ? updatedBeforeFolderId : updatedAfterFolderId;
+    //         const newFileName = `Updated-${path.parse(originalname).name}.jpg`;
+    //         const updatedFolderId = fieldname === 'beforePic' ? updatedBeforeFolderId : updatedAfterFolderId;
     
-            logMemoryUsage('Start upload to drive');
-            await pipelineAsync(
-                transformedStream,
-                async function (source) {
-                    await uploadFile2(source, 'application/octet-stream', updatedFolderId, newFileName);
-                }
-            );
-            logMemoryUsage('End upload to drive');
-            console.log(`Image transformation and upload successful for ${fileId}`);
-        } catch (error) {
-            console.error(`Error in image transformation for ${item.fileId}:`, error);
-        }
-        return 0;
-    }
+    //         logMemoryUsage('Start upload to drive');
+    //         const x = await pipelineAsync(
+    //             transformedStream,
+    //             async function (source) {
+    //                 await uploadFile2(source, 'image/jpeg', updatedFolderId, newFileName);
+    //             }
+    //         );
+    //         logMemoryUsage('End upload to drive');
+    //         return 0;
+    //     } catch (error) {
+    //         console.error(`Error in image transformation for ${item.fileId}:`, error);
+    //     }
+    //     return 0;
+    // }
     
-    for (const item of arr) {
-        console.log(`Processing item: ${item.fileId}`);
-        await processItem(item);
-        logMemoryUsage('End of processItem');
-    }
-    return 0;
+    // for (const item of arr) {
+    //     console.log(`Processing item: ${item.fileId}`);
+    //     const x = await processItem(item);
+    //     logMemoryUsage('End of processItem');
+    // }
+    // return 0;
 }
 
 module.exports = { processAndUploadImages, makeFirstFolder };
