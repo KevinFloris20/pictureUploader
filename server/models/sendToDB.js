@@ -7,12 +7,6 @@ const { pipeline } = require('stream');
 const util = require('util');
 const pipelineAsync = util.promisify(pipeline);
 
-
-const logMemoryUsage = (message) => {
-    const memoryUsage = process.memoryUsage();
-    console.log(`Memory Usage: RSS: ${Math.round(memoryUsage.rss / 1024 / 1024)} MB, External: ${Math.round(memoryUsage.external / 1024 / 1024)} MB, Heap Total: ${Math.round(memoryUsage.heapTotal / 1024 / 1024)} MB, Heap Used: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB -- ${message}`);
-};
-
 async function withExponentialBackoff(operation, maxRetries = 5) {
     let retryCount = 0;
     let delay = 1000;
@@ -46,7 +40,6 @@ this function also makes the file structure for each submit.
 Once this is done an array of image id's are passed to the next function,
 It does most of this functionality using a custom microservice on cloudrun*/
 async function processAndUploadImages(equipmentFolderId, images) {
-    logMemoryUsage('Start of processAndUploadImages');
 
     const beforeFolderId = await withExponentialBackoff(() => createFolder('Before', equipmentFolderId));
     const afterFolderId = await withExponentialBackoff(() => createFolder('After', equipmentFolderId));
@@ -56,14 +49,12 @@ async function processAndUploadImages(equipmentFolderId, images) {
     let imageIds = [];
     let nextArr = [];
     for (const { buffer, originalname, mimetype, fieldname } of images) {
-        logMemoryUsage(`Processing image: ${originalname}`);
         const parentFolderId = fieldname === 'beforePic' ? beforeFolderId : afterFolderId;
         const stream = bufferToStream(buffer);
         const fileId = await withExponentialBackoff(() => uploadFile(stream, mimetype, parentFolderId, originalname));
         imageIds.push(fileId);
         nextArr.push({ fileId, updatedBeforeFolderId, updatedAfterFolderId, originalname, fieldname });
     }
-    logMemoryUsage('End of processAndUploadImages sending array to transformAndUploadImage');
     transformAndUploadImage(nextArr);
     return imageIds; 
 }

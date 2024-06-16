@@ -37,12 +37,13 @@ router.use(bodyParser.urlencoded({ limit: `${maxFileSize}mb`, extended: true }))
 
 
 //router for front end statics
-router.get('/semantic.min.css', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public', 'semantic.min.css'));
+router.get('/other/site.webmanifest', (req, res) => {
+    res.type('application/manifest+json');
+    res.sendFile(path.join(__dirname, '..', 'public', 'other', 'site.webmanifest'));
 });
-router.get('/semantic.min.js', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public', 'semantic.min.js'));
-});
+
+router.use(express.static(path.join(__dirname, '..', 'public/other')));
+
 router.get('/style.css', (req,res) =>{
     res.sendFile(path.join(__dirname,"../public", 'style.css'));
 });
@@ -51,12 +52,6 @@ router.get('/script.js', (req,res) =>{
 });
 
 
-count = 10000;
-const logMemoryUsage = (event) => {
-    const used = process.memoryUsage();
-    console.log(`${event} -- Memory Usage: heapTotal ${Math.round(used.heapTotal / 1024 / 1024)} MB, heapUsed ${Math.round(used.heapUsed / 1024 / 1024)} MB, RSS ${Math.round(used.rss / 1024 / 1024)} MB, count: ${count++}`);
-};
-logMemoryUsage("Start of server")
 
 //all other routers:
 router.get('/', (req, res) => {
