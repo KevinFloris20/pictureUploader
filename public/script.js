@@ -91,60 +91,72 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalImages = fileTracker.beforePic.length + fileTracker.afterPic.length;
     
         // Start the session
-        fetch('/start-session', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ equipmentId, totalImages })
-        })
-        .then(response => response.json())
-        .then(data => {
-            const sessionId = data.sessionId;
-            console.log('Session ID:', sessionId);
-        
-            let uploadPromises = [];
-        
-            fileTracker.beforePic.forEach((file, index) => {
-                const formData = new FormData();
-                formData.append('sessionId', sessionId);
-                formData.append('beforePic', file, file.name); 
-                uploadPromises.push(fetch('/upload', {
+        async function uploadFiles(equipmentId, totalImages) {
+            try {
+                // First we will create a sesshion to communicate with the server and send all appropriate data
+                //after that we will send the before pics then the after pics and then we will close our upload session
+                const response = await fetch('/start-session', {
                     method: 'POST',
-                    body: formData
-                }).then(response => response.json()));
-            });
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ equipmentId, totalImages })
+                });
+                const data = await response.json();
+                const sessionId = data.sessionId;
+                console.log('Session ID:', sessionId);
         
-            fileTracker.afterPic.forEach((file, index) => {
-                const formData = new FormData();
-                formData.append('sessionId', sessionId);
-                formData.append('afterPic', file, file.name);
-                uploadPromises.push(fetch('/upload', {
+                let uploadPromises = [];
+        
+
+                // Upload before pics
+                fileTracker.beforePic.forEach((file, index) => {
+                    const formData = new FormData();
+                    formData.append('sessionId', sessionId);
+                    formData.append('beforePic', file, file.name);
+                    uploadPromises.push(fetch('/upload', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => response.json()));
+                });
+        
+                // copy and pasted for the after pics
+                fileTracker.afterPic.forEach((file, index) => {
+                    const formData = new FormData();
+                    formData.append('sessionId', sessionId);
+                    formData.append('afterPic', file, file.name);
+                    uploadPromises.push(fetch('/upload', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => response.json()));
+                });
+        
+                //make sure it all works
+                await Promise.all(uploadPromises);
+        
+                // Finalize the session
+                const finalizeResponse = await fetch('/finalize-session', {
                     method: 'POST',
-                    body: formData
-                }).then(response => response.json()));
-            });
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionId })
+                });
+                const finalizeData = await finalizeResponse.json();
+                console.log(finalizeData.message);
+                setLoading(false);
+                //What better way to manage dom state than to reload the page XOXO
+                window.location.reload();
+            } catch(error){
+                console.error('Error:', error);
+                setLoading(false);
+                if (!navigator.onLine) {
+                    showError('You are offline. Please check your internet connection.');
+                    return false;
+                }else{
+                    showError(`An error occurred, please try again. ${error.message}`);
+                
+                }
+            }
+        }
+        uploadFiles(equipmentId, totalImages);
         
-            return Promise.all(uploadPromises).then(() => sessionId);
-        })
-        .then(sessionId => {
-            return fetch('/finalize-session', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ sessionId })
-            });
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);
-            setLoading(false); 
-            window.location.reload();
-        })
-        .catch(error => {
-            // convert json res
-            let e = error.json();
-            console.error('Error:', e);
-            setLoading(false);
-            showError(`An error occurred, please try again. ${e.error}`);
-        });
     }
     
     document.getElementById('submitBtn').addEventListener('click', submitForm);

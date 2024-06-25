@@ -45,7 +45,9 @@ async function downloadFile(fileId) {
     const response = await drive.files.get({
         fileId,
         alt: 'media',
-    }, { responseType: 'stream' });
+    },{ 
+        responseType: 'stream' 
+    });
     return response.data; 
 }
 
@@ -67,43 +69,42 @@ async function getAccessToken() {
 }
 
 async function uploadFile2(stream, mimeType, folderId, fileName) {
-  const accessToken = await getAccessToken();
-  const formData = new FormData();
-  formData.append('metadata', JSON.stringify({
-      name: fileName,
-      parents: [folderId]
-  }), {
-      contentType: 'application/json'
-  });
-  formData.append('file', stream, {
-      filename: fileName,
-      contentType: mimeType,
-  });
+    const accessToken = await getAccessToken();
+    const formData = new FormData();
 
-  const response = await axios.post('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', formData, {
-      headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          ...formData.getHeaders(),
-      },
-      maxContentLength: Infinity,
-      maxBodyLength: Infinity,
-  });
+    formData.append('metadata', JSON.stringify({
+        name: fileName,
+        parents: [folderId]
+    }),{
+        contentType: 'application/json'
+    });
 
-  console.log(`Image transformation and upload successful for new file: ${response.data.id}`);
-  return 0
+    formData.append('file', stream, {
+        filename: fileName,
+        contentType: mimeType,
+    });
+
+    const response = await axios.post('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', formData, {
+        headers: {'Authorization': `Bearer ${accessToken}`, ...formData.getHeaders(),},
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    });
+
+    console.log(`Image transformation and upload successful for new file: ${response.data.id}`);
+    return 0
 }
 
 async function downloadFile2(fileId) {
-  const accessToken = await getAccessToken();
-  const response = await axios({
-      url: `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
-      method: 'GET',
-      responseType: 'stream',
-      headers: {
-          'Authorization': `Bearer ${accessToken}`,
-      },
-  });
-  return response.data;
+    const accessToken = await getAccessToken();
+    const response = await axios({
+        url: `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
+        method: 'GET',
+        responseType: 'stream',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+        },
+    });
+    return response.data;
 }
 
 
