@@ -162,4 +162,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('submitBtn').addEventListener('click', submitForm);
     document.getElementById('beforePic').addEventListener('change', (e) => addFiles('beforePic', e.target.files));
     document.getElementById('afterPic').addEventListener('change', (e) => addFiles('afterPic', e.target.files));
+    
 });
