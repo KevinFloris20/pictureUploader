@@ -43,7 +43,17 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ff0000",
-    "background_color": "#ff0000",
-    "display": "standalone"
+    "theme_color": "#f4f4f4",
+    "background_color": "#f4f4f4",
+    "display": "standalone",
+    "start_url": "/",
+    "scope": "/",
+    "orientation": "portrait",
+    "screenshots": [
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
 }
