@@ -6,3 +6,11 @@ uploadfcrphotos-f951f2117601.json
 # docker build -t pumicroservice .
 # docker tag pumicroservice us-east4-docker.pkg.dev/uploadfcrphotos/pumicroservicerepo/pumicroservice
 # docker push us-east4-docker.pkg.dev/uploadfcrphotos/pumicroservicerepo/pumicroservice
+# gcloud run deploy pumicroservice
+
+
+# gcloud run deploy pumicroservice \
+#   --image=us-east4-docker.pkg.dev/uploadfcrphotos/pumicroservicerepo/pumicroservice \
+#   --region=us-east4 \
+#   --platform=managed \
+#   --allow-unauthenticated
