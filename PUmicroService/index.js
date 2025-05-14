@@ -29,7 +29,7 @@ const FormData = require('form-data');
 
 async function getAccessToken() {
     const auth = new GoogleAuth({
-        keyFile: process.env.KEYFILEPATH,
+        keyFile: process.env.KEYFILEPATH2,
         scopes: ['https://www.googleapis.com/auth/drive'],
     });
     const client = await auth.getClient();
